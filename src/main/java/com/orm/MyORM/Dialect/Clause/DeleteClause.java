@@ -1,16 +1,16 @@
-package com.orm.MyORM.Dialect.Clause;
+package  com.orm.MyORM.Dialect.Clause;
 
-import com.orm.MyORM.Dialect.Value.FieldValue;
+import  com.orm.MyORM.Dialect.Clause.Clause;
 
-public class DeleteClause extends Clause{
-    protected String literal = "DELETE FROM";
-    public DeleteClause(String tableName) {
-        this.paramsString = tableName;
+public class DeleteClause extends Clause {
+    protected String literal = "DELETE";
+
+    public DeleteClause() {
     }
 
     @Override
     public String build(String sql) {
-        String newSql = String.join(" ", sql, this.literal, paramsString);
-        return buildNext(newSql);
+        String sqlStatement = String.join(" ", sql, literal);
+        return buildNext(sqlStatement);
     }
 }

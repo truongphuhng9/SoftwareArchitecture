@@ -24,7 +24,7 @@ public class TaskServiceImp implements TaskService {
         return taskRepository.getTasksByUserId(user.getId());
     }
 
-    public boolean deleteTask(String username, int taskId) {
+    public boolean deleteTask(String username, int taskId) throws Exception {
         Task task = this.taskRepository.getTaskById(taskId);
         if (username.equals("someone")) {
             return this.taskRepository.deleteTaskById(taskId);

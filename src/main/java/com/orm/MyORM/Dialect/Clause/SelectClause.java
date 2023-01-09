@@ -1,4 +1,4 @@
-package com.orm.MyORM.Dialect.Clause;
+package  com.orm.MyORM.Dialect.Clause;
 
 public class SelectClause extends Clause {
     protected String literal = "SELECT";

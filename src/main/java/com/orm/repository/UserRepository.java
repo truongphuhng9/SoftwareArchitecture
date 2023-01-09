@@ -17,7 +17,7 @@ public class UserRepository extends RepositoryImpl<User, Integer> {
     public User getUserByUsername(String username) throws Exception {
         SelectQuery selectQuery = new SelectQuery();
         String sql = selectQuery.select().from("users").where(new EqualCondition(new FieldValue("username"), new StringValue(username))).build();
-        return this.query(sql);
+        return this.execute(sql);
     }
 
     public boolean addNewUser(String username, String password, String fullname) throws Exception {

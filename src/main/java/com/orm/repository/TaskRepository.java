@@ -12,6 +12,7 @@ import com.orm.entity.Task;
 
 import java.io.File;
 import java.util.List;
+import java.util.Optional;
 
 public class TaskRepository extends RepositoryImpl<Task, Integer> {
 
@@ -25,20 +26,25 @@ public class TaskRepository extends RepositoryImpl<Task, Integer> {
         return (List<Task>) this.executeList(sql);
     }
 
-    public Task getTaskById(int taskId) {
-
-        switch (taskId) {
-            case 1:
-                return new Task(1, 1, "Do", "do task description");
-            case 2:
-                return new Task(2, 1, "Some", "do some description");
-            case 3:
-                return new Task(3, 1, "Thing", "do thing description");
-            case 4:
-                return new Task(4, 1, "Great", "do great description");
-            default:
-                return null;
+    public Task getTaskById(int taskId) throws Exception {
+        Optional<Task> task = this.findById(taskId);
+        if (task.isEmpty()) {
+            return null;
+        } else {
+            return task.get();
         }
+//        switch (taskId) {
+//            case 1:
+//                return new Task(1, 1, "Do", "do task description");
+//            case 2:
+//                return new Task(2, 1, "Some", "do some description");
+//            case 3:
+//                return new Task(3, 1, "Thing", "do thing description");
+//            case 4:
+//                return new Task(4, 1, "Great", "do great description");
+//            default:
+//                return null;
+//        }
     }
 
     public boolean createTask(int userId, String taskName, String taskDesc) throws Exception {
@@ -51,19 +57,19 @@ public class TaskRepository extends RepositoryImpl<Task, Integer> {
     }
 
     public boolean deleteTaskById(int taskId) {
-
-        DeleteQuery deleteQuery = new DeleteQuery();
-        String tx = deleteQuery
-                .delete_from("tasks")
-                .where(new EqualCondition(new FieldValue("id"),new IntegerValue(taskId)))
-                .build();
-
-        try {
-            this.execute(tx);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return true;
+//        DeleteQuery deleteQuery = new DeleteQuery();
+//        String tx = deleteQuery
+//                .delete_from("tasks")
+//                .where(new EqualCondition(new FieldValue("id"), new IntegerValue(taskId)))
+//                .build();
+//
+//        try {
+//            this.execute(tx);
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
     }
-
 }

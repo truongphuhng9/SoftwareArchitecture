@@ -1,6 +1,6 @@
-package com.orm.MyORM.MySqlDialect.Clause;
+package  com.orm.MyORM.MySqlDialect.Clause;
 
-import com.orm.MyORM.Dialect.Clause.ValuesClause;
+import  com.orm.MyORM.Dialect.Clause.ValuesClause;
 
 public class MySqlValuesClause extends ValuesClause {
     public MySqlValuesClause(String... columns) {

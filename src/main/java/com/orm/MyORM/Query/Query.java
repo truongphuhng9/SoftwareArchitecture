@@ -1,7 +1,7 @@
-package com.orm.MyORM.Query;
+package  com.orm.MyORM.Query;
 
-import com.orm.MyORM.Dialect.Clause.*;
-import com.orm.MyORM.Dialect.ClauseFactory;
+import  com.orm.MyORM.Dialect.Clause.*;
+import  com.orm.MyORM.Dialect.ClauseFactory;
 
 import java.util.ArrayList;
 import java.util.List;

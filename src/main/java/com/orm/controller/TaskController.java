@@ -21,7 +21,7 @@ public class TaskController {
     public Object deleteTask(
             @PathVariable int taskId,
             HttpSession session
-    ) {
+    ) throws Exception {
         String username = String.valueOf(session.getAttribute("Username"));
 
         boolean isSuccess = this.taskService.deleteTask(username, taskId);

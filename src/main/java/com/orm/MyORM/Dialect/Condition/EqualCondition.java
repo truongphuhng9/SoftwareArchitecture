@@ -1,6 +1,6 @@
-package com.orm.MyORM.Dialect.Condition;
+package  com.orm.MyORM.Dialect.Condition;
 
-import com.orm.MyORM.Dialect.Value.Value;
+import  com.orm.MyORM.Dialect.Value.Value;
 
 public class EqualCondition implements Condition{
     private Value left;

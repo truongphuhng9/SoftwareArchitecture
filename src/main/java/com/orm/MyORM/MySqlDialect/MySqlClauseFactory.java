@@ -1,9 +1,9 @@
-package com.orm.MyORM.MySqlDialect;
+package  com.orm.MyORM.MySqlDialect;
 
-import com.orm.MyORM.Dialect.Clause.*;
-import com.orm.MyORM.Dialect.ClauseFactory;
-import com.orm.MyORM.Dialect.Condition.Condition;
-import com.orm.MyORM.MySqlDialect.Clause.*;
+import  com.orm.MyORM.MySqlDialect.Clause.*;
+import  com.orm.MyORM.Dialect.Clause.*;
+import  com.orm.MyORM.Dialect.ClauseFactory;
+import  com.orm.MyORM.Dialect.Condition.Condition;
 
 public class MySqlClauseFactory implements ClauseFactory {
     @Override

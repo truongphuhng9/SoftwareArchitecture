@@ -1,4 +1,4 @@
-package com.orm.MyORM.Dialect.Value;
+package  com.orm.MyORM.Dialect.Value;
 
 public class IntegerValue implements Value {
     private int value;

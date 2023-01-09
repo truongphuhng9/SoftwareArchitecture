@@ -1,4 +1,4 @@
-package com.orm.MyORM.Dialect.Value;
+package  com.orm.MyORM.Dialect.Value;
 
 public class StringValue implements Value {
     private String value;

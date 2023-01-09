@@ -1,4 +1,4 @@
-package com.orm.MyORM.Dialect.Clause;
+package  com.orm.MyORM.Dialect.Clause;
 
 public abstract class Clause {
     protected String paramsString;

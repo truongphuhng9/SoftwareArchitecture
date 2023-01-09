@@ -1,10 +1,13 @@
-package com.orm.MyORM.Dialect.DbConnection;
+package  com.orm.MyORM.Dialect.DbConnection;
+
+import  com.orm.MyORM.Dialect.DbConnection.IDbConnection;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.*;
 
-public class PostgreSqlConnection implements IDbConnection{
+public class PostgreSqlConnection implements IDbConnection {
+
     private static PostgreSqlConnection instance = null;
     private Connection conn = null;
     private String prefix;
@@ -13,13 +16,14 @@ public class PostgreSqlConnection implements IDbConnection{
         this.prefix = "jdbc:postgresql://";
     }
 
-    public static PostgreSqlConnection getInstance() {
-        if (instance == null) {
-            instance = new PostgreSqlConnection();
+    public static PostgreSqlConnection getInstance(){
+        if(instance==null){
+            instance=new PostgreSqlConnection();
         }
         return instance;
     }
 
+    @Override
     public void connect(String host, int port, String dbName, String user, String password) throws SQLException {
         if (conn != null && !conn.isClosed()) {
             disconnect();
@@ -28,12 +32,14 @@ public class PostgreSqlConnection implements IDbConnection{
         this.conn = DriverManager.getConnection(url, user, password);
     }
 
+    @Override
     public void disconnect() throws SQLException {
         if (conn != null) {
             conn.close();
         }
     }
 
+    @Override
     public Connection getConnection() {
         if (conn != null) {
             return this.conn;
@@ -41,4 +47,3 @@ public class PostgreSqlConnection implements IDbConnection{
         return null;
     }
 }
-

@@ -1,7 +1,7 @@
-package com.orm.MyORM.Query;
+package  com.orm.MyORM.Query;
 
-import com.orm.MyORM.Dialect.Clause.InsertClause;
-import com.orm.MyORM.Dialect.Clause.ValuesClause;
+import  com.orm.MyORM.Dialect.Clause.InsertClause;
+import  com.orm.MyORM.Dialect.Clause.ValuesClause;
 
 public class InsertQuery extends Query{
     public InsertQuery() {}

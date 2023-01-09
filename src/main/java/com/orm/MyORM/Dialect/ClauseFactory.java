@@ -1,7 +1,7 @@
-package com.orm.MyORM.Dialect;
+package  com.orm.MyORM.Dialect;
 
-import com.orm.MyORM.Dialect.Clause.*;
-import com.orm.MyORM.Dialect.Condition.Condition;
+import  com.orm.MyORM.Dialect.Clause.*;
+import  com.orm.MyORM.Dialect.Condition.Condition;
 
 public interface ClauseFactory {
     public SelectClause createSelectClause();

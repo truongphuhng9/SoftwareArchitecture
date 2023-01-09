@@ -1,6 +1,6 @@
-package com.orm.MyORM.Dialect.Clause;
+package  com.orm.MyORM.Dialect.Clause;
 
-import com.orm.MyORM.Dialect.Value.FieldValue;
+import  com.orm.MyORM.Dialect.Value.FieldValue;
 
 public class FromClause extends Clause {
     protected String literal = "FROM";

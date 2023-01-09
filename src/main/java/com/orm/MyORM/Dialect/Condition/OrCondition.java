@@ -1,4 +1,4 @@
-package com.orm.MyORM.Dialect.Condition;
+package  com.orm.MyORM.Dialect.Condition;
 
 public class OrCondition implements Condition{
     Condition left;
