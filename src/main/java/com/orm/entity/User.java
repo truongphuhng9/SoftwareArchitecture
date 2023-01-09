@@ -1,9 +1,30 @@
 package com.orm.entity;
 
+import com.orm.MyORM.Annotation.Column;
+import com.orm.MyORM.Annotation.Id;
+import com.orm.MyORM.Annotation.Table;
+
+
+@Table(value = "users")
 public class User {
-    private String username;// primary key
+    @Id
+    @Column
+    private int id;
+
+    @Column
+    private String username;
+    @Column
     private String fullname;
+    @Column
     private String password;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;

@@ -1,52 +1,69 @@
 package com.orm.repository;
 
+import com.orm.MyORM.Dialect.Condition.EqualCondition;
+import com.orm.MyORM.Dialect.Value.FieldValue;
+import com.orm.MyORM.Dialect.Value.IntegerValue;
+import com.orm.MyORM.Dialect.Value.StringValue;
+import com.orm.MyORM.Query.DeleteQuery;
+import com.orm.MyORM.Query.InsertQuery;
+import com.orm.MyORM.Query.SelectQuery;
+import com.orm.MyORM.Repository.RepositoryImpl;
 import com.orm.entity.Task;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.io.File;
 import java.util.List;
 
-@Repository
-public class TaskRepository {
+public class TaskRepository extends RepositoryImpl<Task, Integer> {
 
-    public List<Task> getTasksByUsername(String username) {
+    public TaskRepository() {
+        super(Task.class, Integer.class);
+    }
 
-        if (username.equals("someone")) {
-            return new ArrayList<Task>() {
-                {
-                    add(new Task(1, "someone", "Do", "do task description"));
-                    add(new Task(2, "someone", "Some", "do some description"));
-                    add(new Task(3, "someone", "Thing", "do thing description"));
-                    add(new Task(4, "someone", "Great", "do great description"));
-                }
-            };
-        }
-        ;
-
-        return new ArrayList<Task>();
+    public List<Task> getTasksByUserId(int userId) throws Exception {
+        SelectQuery selectQuery = new SelectQuery();
+        String sql = selectQuery.select().from("tasks").where(new EqualCondition(new FieldValue("userId"), new IntegerValue(userId))).build();
+        return (List<Task>) this.executeList(sql);
     }
 
     public Task getTaskById(int taskId) {
+
         switch (taskId) {
             case 1:
-                return new Task(1, "someone", "Do", "do task description");
+                return new Task(1, 1, "Do", "do task description");
             case 2:
-                return new Task(2, "someone", "Some", "do some description");
+                return new Task(2, 1, "Some", "do some description");
             case 3:
-                return new Task(3, "someone", "Thing", "do thing description");
+                return new Task(3, 1, "Thing", "do thing description");
             case 4:
-                return new Task(4, "someone", "Great", "do great description");
+                return new Task(4, 1, "Great", "do great description");
             default:
                 return null;
         }
     }
 
-    public Task createTask(String username, String taskName, String taskDesc) {
-        return new Task(5, username, taskName, taskDesc);
+    public boolean createTask(int userId, String taskName, String taskDesc) throws Exception {
+        Task task = new Task();
+        task.setUserId(userId);
+        task.setTaskName(taskName);
+        task.setTaskDesc(taskDesc);
+
+        return this.insertOne(task);
     }
 
     public boolean deleteTaskById(int taskId) {
-        return true;
+
+        DeleteQuery deleteQuery = new DeleteQuery();
+        String tx = deleteQuery
+                .delete_from("tasks")
+                .where(new EqualCondition(new FieldValue("id"),new IntegerValue(taskId)))
+                .build();
+
+        try {
+            this.execute(tx);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

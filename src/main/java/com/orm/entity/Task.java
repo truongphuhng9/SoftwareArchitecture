@@ -1,32 +1,45 @@
 package com.orm.entity;
 
+import com.orm.MyORM.Annotation.Column;
+import com.orm.MyORM.Annotation.Id;
+import com.orm.MyORM.Annotation.Table;
+
+@Table(value = "tasks")
 public class Task {
+    @Id
+    @Column
     private int id;
-    private String username;
+    @Column
+    private int userId;
+    @Column
     private String taskName;
+    @Column
     private String taskDesc;
+
+    public Task() {
+    }
+
+    public Task(int id, int userId, String taskName, String taskDesc) {
+        this.id = id;
+        this.userId = userId;
+        this.taskName = taskName;
+        this.taskDesc = taskDesc;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public Task(int id, String username, String taskName, String taskDesc) {
-        this.id = id;
-        this.username = username;
-        this.taskName = taskName;
-        this.taskDesc = taskDesc;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getTaskName() {

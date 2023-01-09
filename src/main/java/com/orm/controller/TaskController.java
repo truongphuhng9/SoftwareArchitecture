@@ -45,19 +45,18 @@ public class TaskController {
             @RequestParam("task-name") String taskName,
             @RequestParam("task-desc") String taskDesc,
             HttpSession session
-    ) {
+    ) throws Exception {
         String username = String.valueOf(session.getAttribute("Username"));
-        Task task = this.taskService.createTask(username, taskName, taskDesc);
+        boolean isSuccess = this.taskService.createTask(username, taskName, taskDesc);
 
         ResponsePayload responsePayload = new ResponsePayload();
-        if (task == null) {
+        if (!isSuccess) {
             session.setAttribute("Error", "Cannot create task");
             responsePayload.setStatus(400);
             responsePayload.setSuccess(false);
         } else {
             responsePayload.setStatus(200);
             responsePayload.setSuccess(true);
-            responsePayload.setData(task);
         }
 
         return responsePayload;

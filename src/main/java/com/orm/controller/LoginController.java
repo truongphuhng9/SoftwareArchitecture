@@ -37,7 +37,7 @@ public class LoginController {
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             HttpSession session
-    ) {
+    ) throws Exception {
         User user = userService.loginUser(username, password);
 
         if (user ==null) {

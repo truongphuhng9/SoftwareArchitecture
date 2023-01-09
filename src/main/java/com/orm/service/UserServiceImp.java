@@ -9,12 +9,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImp implements UserService {
     private UserRepository userRepository;
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserServiceImp() {
+        this.userRepository = new UserRepository();
     }
 
-    public User loginUser(String username, String password) {
+    public User loginUser(String username, String password) throws Exception {
         User user = userRepository.getUserByUsername(username);
         if (user == null) {
             return null;
@@ -28,8 +27,9 @@ public class UserServiceImp implements UserService {
         return user;
     }
 
-    public User registerUser(String username, String password, String fullname) {
+    public User registerUser(String username, String password, String fullname) throws Exception {
         boolean isSuccess = userRepository.addNewUser(username, password, fullname);
+
         if (!isSuccess) {
             return null;
         }

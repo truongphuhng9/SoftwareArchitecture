@@ -22,7 +22,7 @@ public class HomeController {
     public String index(
             HttpSession session,
             ModelMap model
-    ) {
+    ) throws Exception {
         String username = session.getAttribute("Username").toString();
         String fullname = session.getAttribute("Fullname").toString();
         List<Task> tasks = this.taskService.getTasksByUsername(username);
