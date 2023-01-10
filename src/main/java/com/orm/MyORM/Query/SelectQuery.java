@@ -1,9 +1,8 @@
 package  com.orm.MyORM.Query;
 
-import  com.orm.MyORM.Dialect.Clause.*;
-import  com.orm.MyORM.Dialect.Condition.Condition;
-import  com.orm.MyORM.Dialect.Value.FieldValue;
-
+import com.orm.MyORM.Dialect.Clause.*;
+import com.orm.MyORM.Dialect.Condition.Condition;
+import com.orm.MyORM.Dialect.Value.FieldValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,8 @@ public class SelectQuery extends Query {
     }
 
     public SelectQuery where(String condition) {
+        WhereClause where = new WhereClause(condition);
+        addClause(where);
         return this;
     }
 

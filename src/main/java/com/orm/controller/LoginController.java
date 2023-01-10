@@ -25,8 +25,6 @@ public class LoginController {
             HttpSession session,
             ModelMap model
     ) {
-        System.out.println();
-
         model.addAttribute("error", session.getAttribute("Error"));
         session.removeAttribute("Error");
         return "login";
