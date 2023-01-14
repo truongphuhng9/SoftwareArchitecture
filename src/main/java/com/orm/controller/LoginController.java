@@ -25,8 +25,6 @@ public class LoginController {
             HttpSession session,
             ModelMap model
     ) {
-        System.out.println();
-
         model.addAttribute("error", session.getAttribute("Error"));
         session.removeAttribute("Error");
         return "login";
@@ -37,7 +35,7 @@ public class LoginController {
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             HttpSession session
-    ) {
+    ) throws Exception {
         User user = userService.loginUser(username, password);
 
         if (user ==null) {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegisterController {
 
     private UserService userService;
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -26,8 +27,6 @@ public class RegisterController {
             HttpSession session,
             ModelMap model
     ) {
-        System.out.println();
-
         model.addAttribute("error", session.getAttribute("Error"));
         session.removeAttribute("Error");
         return "register";
@@ -39,7 +38,7 @@ public class RegisterController {
             @RequestParam("password") String password,
             @RequestParam("fullname") String fullname,
             HttpSession session
-    ) {
+    ) throws Exception {
         User user = userService.registerUser(username, password, fullname);
 
         if (user == null) {

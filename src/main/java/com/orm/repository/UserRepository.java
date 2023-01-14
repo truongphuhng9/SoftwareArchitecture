@@ -1,24 +1,34 @@
 package com.orm.repository;
 
+import com.orm.MyORM.Dialect.Condition.EqualCondition;
+import com.orm.MyORM.Dialect.Value.FieldValue;
+import com.orm.MyORM.Dialect.Value.StringValue;
+import com.orm.MyORM.Query.SelectQuery;
+import com.orm.MyORM.Repository.RepositoryImpl;
 import com.orm.entity.User;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class UserRepository {
+public class UserRepository extends RepositoryImpl<User, Integer> {
 
-    public User getUserByUsername(String username) {
-        if (username.equals("someone")) {
-            User user = new User();
-            user.setUsername("someone");
-            user.setPassword("123456");
-            user.setFullname("Some One");
-            return user;
-        }
-
-        return null;
+    public UserRepository() {
+        super(User.class, Integer.class);
     }
 
-    public boolean addNewUser(String username, String password, String fullname) {
-        return true;
+    public User getUserByUsername(String username) {
+        try {
+            SelectQuery selectQuery = new SelectQuery();
+            String sql = selectQuery.select().from("users").where(new EqualCondition(new FieldValue("username"), new StringValue(username))).build();
+            return this.execute(sql);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public boolean addNewUser(String username, String password, String fullname) throws Exception {
+        User user = new User();
+        user.setUsername(username);
+        user.setFullname(fullname);
+        user.setPassword(password);
+
+        return this.insertOne(user);
     }
 }

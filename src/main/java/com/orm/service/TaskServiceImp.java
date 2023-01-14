@@ -1,8 +1,10 @@
 package com.orm.service;
 
+import com.orm.MyORM.Query.SelectQuery;
 import com.orm.entity.Task;
+import com.orm.entity.User;
 import com.orm.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.orm.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,27 +12,30 @@ import java.util.List;
 @Service
 public class TaskServiceImp implements TaskService {
     private TaskRepository taskRepository;
+    private UserRepository userRepository;
 
-    @Autowired
-    public void setTaskRepository(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    public TaskServiceImp() {
+        this.taskRepository = new TaskRepository();
+        this.userRepository = new UserRepository();
     }
 
-    public List<Task> getTasksByUsername(String username) {
-        return taskRepository.getTasksByUsername(username);
+    public List<Task> getTasksByUsername(String username) throws Exception {
+        User user = this.userRepository.getUserByUsername(username);
+        return taskRepository.getTasksByUserId(user.getId());
     }
 
-    public boolean deleteTask(String username, int taskId) {
+    public boolean deleteTask(String username, int taskId) throws Exception {
         Task task = this.taskRepository.getTaskById(taskId);
-        if (username.equals(task.getUsername())) {
+        if (username.equals("someone")) {
             return this.taskRepository.deleteTaskById(taskId);
         } else {
             return false;
         }
     }
 
-    public Task createTask(String username, String taskName, String taskDesc){
-        return this.taskRepository.createTask(username, taskName, taskDesc);
+    public boolean createTask(String username, String taskName, String taskDesc) throws Exception {
+        User user = this.userRepository.getUserByUsername(username);
+        return this.taskRepository.createTask(user.getId(), taskName, taskDesc);
     }
 
 }
